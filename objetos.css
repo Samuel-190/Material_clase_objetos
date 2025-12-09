@@ -1,0 +1,124 @@
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", Arial, sans-serif;
+        background: #e9eef5;
+        color: #333;
+        scroll-behavior: smooth;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    header {
+        background: linear-gradient(135deg, #0057ff, #00c6ff);
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+        font-size: 38px;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        letter-spacing: 1px;
+        animation: headerSlide 1.2s ease;
+    }
+
+    @keyframes headerSlide {
+        from { transform: translateY(-40px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+    }
+
+    .container1 {
+        width: 90%;
+        max-width: 1150px;
+        margin: 40px auto;
+    }
+
+    /* ----- TARJETAS ----- */
+    .card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 35px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        transition: transform .3s, box-shadow .3s;
+        animation: appear .8s ease;
+    }
+
+    @keyframes appear {
+        from { transform: scale(0.95); opacity: 0; }
+        to   { transform: scale(1); opacity: 1; }
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    h2 {
+        color: #0057ff;
+        margin-top: 0;
+        font-size: 26px;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    /* ----- CÓDIGO ----- */
+    pre {
+        background: #1e1e1e;
+        color: #00ffbf;
+        padding: 17px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 15px;
+        margin-top: 15px;
+        white-space: pre-wrap;
+    }
+
+    /* ----- EJERCICIOS ----- */
+    .exercise {
+        background: #f0fbff;
+        border-left: 5px solid #00c6ff;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 8px;
+        font-size: 17px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 50px;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .boton_tridi {
+        width: 100%;
+        height: 8vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.tridi {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #0057ff;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.tridi:hover {
+    transform: scale(1.2, 1.2);
+    transition: calc(0.6s);
+    box-shadow: 0px 0px 17px #00c6ff;
+}

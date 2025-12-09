@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="objetos.css">
+<title>Objetos en JavaScript - Presentación Completa</title>
+
+</head>
+
+<body>
+
+<header>Objetos en JavaScript - Lo esencial</header>
+
+<div class="container1">
+
+    <!-- 1 -->
+    <div class="card">
+        <h2>1. ¿Qué es un Objeto?</h2>
+        <p>
+            Un objeto es una estructura que te permite almacenar información relacionada.  
+            Cada objeto puede contener <strong>propiedades</strong> (datos) y <strong>métodos</strong> (funciones).
+        </p>
+        <p>
+            Los objetos son fundamentales en JavaScript, porque representan cosas del "mundo real":  
+            personas, autos, usuarios, productos, etc.
+        </p>
+        <pre>
+// Objeto simple
+let persona = {
+    nombre: "Ana",
+    edad: 25,
+    saludar: function() {
+        console.log("Hola, soy Ana");
+    }
+};    
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            Crea un objeto llamado <code>animal</code> con propiedades <code>tipo</code> y <code>edad</code>,  
+            y un método <code>hacerSonido()</code> que imprima un sonido.
+        </div>
+    </div>
+
+    <div class="boton_tridi">
+        <button class="tridi" onclick="window.location.href='car.html'">Ejemplo con objeto tridimensional</button>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+        <h2>2. Crear Objetos</h2>
+        <p>
+            La forma más común de crear objetos es usando un <strong>objeto literal</strong>.  
+            Esta sintaxis es rápida, directa y muy utilizada.
+        </p>
+
+        <pre>
+let coche = {
+    marca: "Toyota",
+    modelo: "Corolla",
+    año: 2020
+};
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            Crea un objeto llamado <code>computadora</code> con propiedades:  
+            <code>marca</code>, <code>ram</code> y <code>almacenamiento</code>.
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+        <h2>3. Acceder a Propiedades</h2>
+        <p>
+            Puedes acceder a los valores del objeto de dos maneras:
+        </p>
+        <ul>
+            <li><strong>Notación de punto:</strong> sencilla y directa.</li>
+            <li><strong>Notación de corchetes:</strong> útil cuando la clave tiene espacios o viene de una variable.</li>
+        </ul>
+
+        <pre>
+coche.marca;        // "Toyota"
+coche["modelo"];    // "Corolla"
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            Desde el objeto <code>computadora</code> del ejercicio anterior, muestra en consola la marca.
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+        <h2>4. Modificar Objetos</h2>
+        <p>
+            Los objetos en JavaScript son <strong>modificables</strong> incluso después de crearse.
+        </p>
+
+        <pre>
+coche.color = "Rojo";   // añadir propiedad
+coche.marca = "Nissan"; // modificar propiedad
+delete coche.año;       // eliminar propiedad
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            Agrega una propiedad nueva llamada <code>precio</code> a tu objeto <code>computadora</code>.
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+        <h2>5. Métodos de un Objeto</h2>
+        <p>
+            Un método es una función dentro de un objeto.  
+            Se usa para representar acciones del objeto.
+        </p>
+
+        <pre>
+let persona = {
+    nombre: "Luis",
+    saludar() {
+        console.log("Hola, soy " + this.nombre);
+    }
+};
+
+persona.saludar();
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            En tu objeto <code>computadora</code>, crea un método <code>detallar()</code> que muestre  
+            sus propiedades.
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+        <h2>6. Objetos Anidados</h2>
+        <p>
+            Puedes guardar objetos dentro de otros objetos.  
+            Esto sirve para representar información compleja de forma clara.
+        </p>
+
+        <pre>
+let usuario = {
+    nombre: "Carlos",
+    direccion: {
+        ciudad: "Madrid",
+        calle: "Sol 123"
+    }
+};
+
+console.log(usuario.direccion.ciudad);
+        </pre>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+        <h2>7. Recorrer un Objeto</h2>
+        <p>
+            Puedes usar <code>for...in</code> para recorrer las claves de un objeto.
+        </p>
+
+        <pre>
+let persona = { nombre: "Ana", edad: 25 };
+
+for (let clave in persona) {
+    console.log(clave, persona[clave]);
+}
+        </pre>
+
+        <div class="exercise">
+            <strong>Ejercicio:</strong>  
+            Recorre tu objeto <code>computadora</code> e imprime todas sus propiedades.
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+        <h2>8. Métodos útiles de Object</h2>
+        <p>Estas herramientas son muy comunes cuando manejas datos:</p>
+
+        <pre>
+Object.keys(persona);   // ["nombre", "edad"]
+Object.values(persona); // ["Ana", 25]
+Object.entries(persona);// [["nombre","Ana"],["edad",25]]
+        </pre>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+        <h2>9. Desestructuración</h2>
+        <p>
+            La desestructuración permite extraer valores del objeto fácilmente.
+        </p>
+
+        <pre>
+let producto = { nombre: "PC", precio: 500 };
+
+let { nombre, precio } = producto;
+console.log(nombre, precio);
+        </pre>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+        <h2>10. Clases (La Forma Moderna)</h2>
+        <p>
+            Las clases son "moldes" que permiten crear múltiples objetos del mismo tipo.
+        </p>
+
+        <pre>
+class Persona {
+    constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    saludar() {
+        console.log("Hola, soy " + this.nombre);
+    }
+}
+
+let ana = new Persona("Ana", 25);
+ana.saludar();
+        </pre>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 – Todos los derechos reservados
+</footer>
+
+</body>
+</html>

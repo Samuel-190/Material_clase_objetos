@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Rotativo Interactivo</title>
+<link rel="stylesheet" href="car.css">
+</head>
+<body>
+
+<header>Auto Rotativo Interactivo</header>
+<h2 class="texto">Observa como este objeto puede cambiar sus propiedades segun su perspectiva y color y asi ser un objeto diferente cada vez.</h2>
+
+<div class="container">
+    <div class="scene">
+        <div class="car" id="car">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face left"></div>
+            <div class="face right"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <!-- Rotación horizontal -->
+        <button onclick="rotateCarY(-15)">◀</button>
+        <button onclick="rotateCarY(15)">▶</button>
+        <!-- Rotación vertical -->
+        <button onclick="rotateCarX(-15)">▲</button>
+        <button onclick="rotateCarX(15)">▼</button>
+        <!-- Cambio de color -->
+        <button onclick="changeColor('red')">🔴</button>
+        <button onclick="changeColor('blue')">🔵</button>
+        <button onclick="changeColor('green')">🟢</button>
+        <button onclick="changeColor('gray')">⚪</button>
+    </div>
+</div>
+
+<script src="car.js"></script>
+</body>
+</html>
+
