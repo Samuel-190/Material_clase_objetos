@@ -25,23 +25,14 @@
             Los objetos son fundamentales en JavaScript, porque representan cosas del "mundo real":  
             personas, autos, usuarios, productos, etc.
         </p>
-        <pre>
-// Objeto simple
-let persona = {
-    nombre: "Ana",
-    edad: 25,
-    saludar: function() {
-        console.log("Hola, soy Ana");
-    }
-};    
-        </pre>
 
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            Crea un objeto llamado <code>animal</code> con propiedades <code>tipo</code> y <code>edad</code>,  
-            y un método <code>hacerSonido()</code> que imprima un sonido.
+        <div class="mas">
+           <details>
+               <summary>Mostrar más información</summary>
+               <p>Esta es la sección desplegable. Puede contener texto, imágenes o cualquier elemento HTML.</p>
+           </details>
         </div>
-    </div>
+    </div> 
 
     <!-- 2 -->
     <div class="card">
@@ -51,73 +42,188 @@ let persona = {
             Esta sintaxis es rápida, directa y muy utilizada.
         </p>
 
-        <pre>
+        <details>
+            <summary>Otras formas de crear objetos.</summary><br>
+            <p class="enunciado">1- Una forma de crear un objeto en JS es con el new object(), el constructor incorporado de JavaScript:</p>
+            <pre>
+const persona = new Object();
+persona.nombre = "Ana";
+persona.edad = 25;
+            </pre><br>
+
+            <p class="enunciado">2- Una función que actúa como “molde” para crear múltiples objetos del mismo tipo:</p>
+            <pre>
+function Persona(nombre, edad) {
+   this.nombre = nombre;
+   this.edad = edad;
+   this.saludar = function() {
+     console.log(`Hola, soy ${this.nombre}`);
+   };
+}
+
+const caro = new Persona("Caro", 30);
+const juan = new Persona("Juan", 25);
+
+caro.saludar(); // Hola, soy Caro
+juan.saludar(); // Hola, soy Juan
+            </pre>
+
+        </details>
+
+        <details>
+            <summary>Codigo de ejemplo</summary>
+            <pre>
 let coche = {
     marca: "Toyota",
     modelo: "Corolla",
     año: 2020
 };
-        </pre>
+            </pre>
+        </details>
 
-    <div class="boton_tridi">
-        <button class="tridi" onclick="window.location.href='juego/index.html'">Actividad participativa</button>
-    </div>
 
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            Crea un objeto llamado <code>computadora</code> con propiedades:  
-            <code>marca</code>, <code>ram</code> y <code>almacenamiento</code>.
+        <div class="boton_tridi">
+            <button class="tridi" onclick="window.location.href='juego/index.html'">Actividad participativa</button>
         </div>
-    </div>
+    </div> 
 
     <!-- 3 -->
     <div class="card">
-        <h2>3. Acceder a Propiedades</h2>
+        <h2>3. Objetos Anidados</h2>
         <p>
-            Puedes acceder a los valores del objeto de dos maneras:
+            Puedes guardar objetos dentro de otros objetos.  
+            Esto sirve para representar información compleja de forma clara.
         </p>
+        <details>
+            <summary>Codigo de ejemplo</summary>
+            <pre>
+let usuario = {
+    nombre: "Carlos",
+    direccion: {
+        ciudad: "Madrid",
+        calle: "Sol 123"
+    }
+};
+
+console.log(usuario.direccion.ciudad);
+            </pre>
+        </details>
+
+        <details>
+            <summary>Extras de los objetos anidados</summary><br>
+            <p class="enunciado">- Los objetos anidados y las funciones se llevan muy bien, ya que Puedes tener métodos dentro de objetos anidados:</p>
+            <pre>
+const persona = {
+  nombre: "Ana",
+  direccion: {
+    calle: "Calle Falsa 123",
+    ciudad: "Madrid",
+    mostrarDireccion() {
+      console.log(`${this.calle}, ${this.ciudad}`);
+    }
+  }
+};
+            </pre><br>
+            <p class="enunciado">- Y por ultimo tenemos el anidamiento profundo, Puedes tener objetos dentro de objetos dentro de objetos, y así sucesivamente:</p>
+            <pre>
+const empresa = {
+  nombre: "TechCorp",
+  ubicacion: {
+    pais: "España",
+    ciudad: "Madrid",
+    oficina: {
+      planta: 3,
+      numero: 305
+    }
+  }
+};
+            </pre>
+
+        </details>
+
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+        <h2>4. Acceder a Propiedades</h2>
+        <p>Puedes acceder a los valores del objeto de dos maneras:</p>
+
         <ul>
             <li><strong>Notación de punto:</strong> sencilla y directa.</li>
             <li><strong>Notación de corchetes:</strong> útil cuando la clave tiene espacios o viene de una variable.</li>
         </ul>
 
-        <pre>
-coche.marca;        // "Toyota"
-coche["modelo"];    // "Corolla"
-        </pre>
+        <details>
+            <summary>Codigo de ejemplo</summary>
+            <pre>
+const coche = {
+  marca: "Toyota",
+  modelo: "Corolla"
+};
 
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            Desde el objeto <code>computadora</code> del ejercicio anterior, muestra en consola la marca.
-        </div>
+console.log(coche.marca);        // "Toyota"
+console.log(coche["modelo"]);    // "Corolla"
+            </pre>
+        </details>
+        <details>
+            <summary>Otras formas...</summary><br>
+            <p class="enunciado">1- Acceso a propiedades anidadas, Si un objeto tiene objetos dentro, podemos combinar notación de punto y corchetes:</p>
+            <pre>
+const persona = {
+  nombre: "Ana",
+  direccion: {
+    ciudad: "Madrid",
+    calle: "Calle Falsa 123"
+  }
+};
+
+console.log(persona.direccion.ciudad);          // Madrid
+console.log(persona["direccion"]["calle"]);     // Calle Falsa 123
+
+const prop = "ciudad";
+console.log(persona.direccion[prop]);           // Madrid
+            </pre><br>
+            <p class="enunciado">2- Usando Object.keys() y Object.values(), Permite recorrer todas las propiedades de un objeto dinámicamente:</p>
+            <pre>
+const persona = { 
+   nombre: "Ana", 
+   edad: 30 
+};
+
+// Obtener las claves
+console.log(Object.keys(persona)); // ["nombre", "edad"]
+
+// Obtener los valores
+console.log(Object.values(persona)); // ["Ana", 30]
+
+// Recorrer propiedades
+Object.keys(persona).forEach(key => {
+  console.log(key, persona[key]);
+});
+
+// nombre Ana
+// edad 30
+            </pre>
+            
+
+        </details>
+
     </div>
 
-    <!-- 4 -->
+    <!-- 5 -->
     <div class="card">
-        <h2>4. Modificar Objetos</h2>
-        <p>
-            Los objetos en JavaScript son <strong>modificables</strong> incluso después de crearse.
-        </p>
+        <h2>5. Modificar Objetos</h2>
 
         <pre>
 coche.color = "Rojo";   // añadir propiedad
 coche.marca = "Nissan"; // modificar propiedad
 delete coche.año;       // eliminar propiedad
         </pre>
-
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            Agrega una propiedad nueva llamada <code>precio</code> a tu objeto <code>computadora</code>.
-        </div>
     </div>
 
-    <!-- 5 -->
+    <!-- 6 -->
     <div class="card">
-        <h2>5. Métodos de un Objeto</h2>
-        <p>
-            Un método es una función dentro de un objeto.  
-            Se usa para representar acciones del objeto.
-        </p>
+        <h2>6. Métodos de un Objeto</h2>
 
         <pre>
 let persona = {
@@ -129,41 +235,11 @@ let persona = {
 
 persona.saludar();
         </pre>
-
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            En tu objeto <code>computadora</code>, crea un método <code>detallar()</code> que muestre  
-            sus propiedades.
-        </div>
-    </div>
-
-    <!-- 6 -->
-    <div class="card">
-        <h2>6. Objetos Anidados</h2>
-        <p>
-            Puedes guardar objetos dentro de otros objetos.  
-            Esto sirve para representar información compleja de forma clara.
-        </p>
-
-        <pre>
-let usuario = {
-    nombre: "Carlos",
-    direccion: {
-        ciudad: "Madrid",
-        calle: "Sol 123"
-    }
-};
-
-console.log(usuario.direccion.ciudad);
-        </pre>
     </div>
 
     <!-- 7 -->
     <div class="card">
         <h2>7. Recorrer un Objeto</h2>
-        <p>
-            Puedes usar <code>for...in</code> para recorrer las claves de un objeto.
-        </p>
 
         <pre>
 let persona = { nombre: "Ana", edad: 25 };
@@ -172,17 +248,11 @@ for (let clave in persona) {
     console.log(clave, persona[clave]);
 }
         </pre>
-
-        <div class="exercise">
-            <strong>Ejercicio:</strong>  
-            Recorre tu objeto <code>computadora</code> e imprime todas sus propiedades.
-        </div>
     </div>
 
     <!-- 8 -->
     <div class="card">
         <h2>8. Métodos útiles de Object</h2>
-        <p>Estas herramientas son muy comunes cuando manejas datos:</p>
 
         <pre>
 Object.keys(persona);   // ["nombre", "edad"]
@@ -194,9 +264,6 @@ Object.entries(persona);// [["nombre","Ana"],["edad",25]]
     <!-- 9 -->
     <div class="card">
         <h2>9. Desestructuración</h2>
-        <p>
-            La desestructuración permite extraer valores del objeto fácilmente.
-        </p>
 
         <pre>
 let producto = { nombre: "PC", precio: 500 };
@@ -209,9 +276,6 @@ console.log(nombre, precio);
     <!-- 10 -->
     <div class="card">
         <h2>10. Clases (La Forma Moderna)</h2>
-        <p>
-            Las clases son "moldes" que permiten crear múltiples objetos del mismo tipo.
-        </p>
 
         <pre>
 class Persona {
@@ -231,6 +295,7 @@ ana.saludar();
     </div>
 
 </div>
+
 
 <footer>
     © 2025 – Todos los derechos reservados
