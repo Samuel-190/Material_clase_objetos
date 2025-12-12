@@ -7,11 +7,19 @@
 </head>
 <body>
     <script>
-        const persona = new Object();
-persona = "Ana";
-persona = 25;
+        const persona = {
+  nombre: "Ana",
+  direccion: {
+    ciudad: "Madrid",
+    calle: "Calle Falsa 123"
+  }
+};
 
-console.log(persona)
+console.log(persona.direccion.ciudad);          // Madrid
+console.log(persona["direccion"]["calle"]);     // Calle Falsa 123
+
+const prop = "ciudad";
+console.log(persona.direccion[prop]);
     </script>
 </body>
 </html>

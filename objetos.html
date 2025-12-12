@@ -138,9 +138,7 @@ const empresa = {
   }
 };
             </pre>
-
         </details>
-
     </div>
 
     <!-- 4 -->
@@ -204,21 +202,65 @@ Object.keys(persona).forEach(key => {
 // nombre Ana
 // edad 30
             </pre>
-            
-
         </details>
-
     </div>
 
     <!-- 5 -->
     <div class="card">
         <h2>5. Modificar Objetos</h2>
+        <p>Un objeto puede cambiar en cualquier momento: puedes agregar, actualizar o eliminar propiedades fácilmente y existen muchas maneras de hacerlo:</p>
 
         <pre>
-coche.color = "Rojo";   // añadir propiedad
-coche.marca = "Nissan"; // modificar propiedad
-delete coche.año;       // eliminar propiedad
+let coche = {
+    marca: "Toyota",
+    año: 2020
+};
+
+coche.color = "Rojo";     // añadir propiedad
+coche.marca = "Nissan";   // modificar propiedad
+delete coche.año;         // eliminar propiedad
         </pre>
+        <p>Tambien funciona con corchetes:</p>
+        <pre>
+coche["año"] = 2024;
+        </pre>
+        <details>
+            <summary>Mas formas de hacerlo:</summary>
+            <pre>
+CODIGO BASE
+
+let producto = {
+  nombre: "Arroz",
+  precio: 3000,
+  cantidad: 2
+};
+            </pre>
+            <p class="enunciado">1- Modificar usando variables como clave, permite actualizar de forma mas dinamica:</p>
+            <pre>
+let clave = "precio";
+producto[clave] = 4200;
+            </pre>
+            <p class="enunciado">2- Modificar propiedades numéricas:</p>
+            <pre>
+producto.cantidad += 1;   // suma 1
+producto.precio -= 500;   // resta 500
+            </pre>
+            <p class="enunciado">3- Agregar un metodo o funcion dentro de un objeto:</p>
+            <pre>
+producto.dialogo = function() {
+  console.log("Hola, el arroz vale " + this.precio + " pesos");
+};
+            </pre>
+            <p class="enunciado">4- Y por supuesto tambien hay solucion por si quieres evitar cualquier tipo de modificacion en el objeto:</p>
+            <p>-Evita agregar o eliminar:</p>
+            <pre>
+Object.seal(producto);
+            </pre>
+            <p>-Evita cualquier cambio:</p>
+            <pre>
+Object.freeze(producto);
+            </pre>
+        </details>
     </div>
 
     <!-- 6 -->
