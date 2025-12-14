@@ -7,19 +7,21 @@
 </head>
 <body>
     <script>
-        const persona = {
-  nombre: "Ana",
-  direccion: {
-    ciudad: "Madrid",
-    calle: "Calle Falsa 123"
+       class Persona {
+  constructor(nombre) {
+    this.nombre = nombre;
   }
-};
+}
 
-console.log(persona.direccion.ciudad);          // Madrid
-console.log(persona["direccion"]["calle"]);     // Calle Falsa 123
+class Estudiante extends Persona {
+  constructor(nombre, carrera) {
+    
+    this.carrera = carrera;
+  }
+}
 
-const prop = "ciudad";
-console.log(persona.direccion[prop]);
+const estu= new Estudiante('Ana', 'Español');
+console.log(estu);
     </script>
 </body>
 </html>

@@ -153,6 +153,26 @@ details {
   font-weight: 600;
 }
 
+.importante {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fcf2c7;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ff7300;
+  font-weight: 600;
+}
+
+.importan {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fcc7c7;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ff0000;
+  font-weight: 600;
+}
+
 details:hover {
     transform: scale(1.02, 1.02);
     transition: calc(0.2s);

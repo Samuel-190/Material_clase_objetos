@@ -25,13 +25,6 @@
             Los objetos son fundamentales en JavaScript, porque representan cosas del "mundo real":  
             personas, autos, usuarios, productos, etc.
         </p>
-
-        <div class="mas">
-           <details>
-               <summary>Mostrar más información</summary>
-               <p>Esta es la sección desplegable. Puede contener texto, imágenes o cualquier elemento HTML.</p>
-           </details>
-        </div>
     </div> 
 
     <!-- 2 -->
@@ -111,19 +104,6 @@ console.log(usuario.direccion.ciudad);
 
         <details>
             <summary>Extras de los objetos anidados</summary><br>
-            <p class="enunciado">- Los objetos anidados y las funciones se llevan muy bien, ya que Puedes tener métodos dentro de objetos anidados:</p>
-            <pre>
-const persona = {
-  nombre: "Ana",
-  direccion: {
-    calle: "Calle Falsa 123",
-    ciudad: "Madrid",
-    mostrarDireccion() {
-      console.log(`${this.calle}, ${this.ciudad}`);
-    }
-  }
-};
-            </pre><br>
             <p class="enunciado">- Y por ultimo tenemos el anidamiento profundo, Puedes tener objetos dentro de objetos dentro de objetos, y así sucesivamente:</p>
             <pre>
 const empresa = {
@@ -266,6 +246,7 @@ Object.freeze(producto);
     <!-- 6 -->
     <div class="card">
         <h2>6. Métodos de un Objeto</h2>
+        <p>Un método es simplemente una función que está dentro de un objeto, pero hay una diferencia clave:<br><br>- Función → vive sola<br>- Método → pertenece a un objeto</p>
 
         <pre>
 let persona = {
@@ -277,47 +258,121 @@ let persona = {
 
 persona.saludar();
         </pre>
+        <details>
+            <summary>Aprendamos mas sobre los metodos...</summary><br>
+            <p class="enunciado">- Existen dos formas correctas de crear metodos:</p>
+            <p>1- Creacion directa:</p>
+            <pre>
+let persona = {
+  nombre: "Ana",
+  saludar() {
+    console.log("Hola, soy " + this.nombre);
+  }
+};
+            </pre>
+            <p>2- Por medio de una propiedad:</p>
+            <pre>
+let persona = {
+  nombre: "Ana",
+  edad: 20,
+  saludar: function () {
+    console.log("Hola");
+  }
+};
+            </pre>
+            <p>3- Ejemplo completo practico:</p>
+            <pre>
+let estudiante = {
+  nombre: "Luis",
+  notas: [4, 3, 5],
+  promedio() {
+    let suma = 0;
+    for (let nota of this.notas) {
+      suma += nota;
+    }
+    return suma / this.notas.length;
+  }
+};
+
+console.log(estudiante.promedio());
+            </pre>
+        </details>
+        <details class="importante">
+            <summary>Cosas a tener en cuenta:</summary><br>
+            <p class="enunciado">- Dentro de un método, usa this para acceder a propiedades del mismo objeto.</p>
+            <p class="enunciado">- Los métodos pueden calcular, mostrar o modificar información.</p>
+            <p class="enunciado">- La diferencia no es qué hacen, sino a quién pertenecen.</p>
+            <p class="enunciado">- Los métodos no tienen que existir siempre desde el inicio.</p>
+        </details>
     </div>
 
     <!-- 7 -->
     <div class="card">
-        <h2>7. Recorrer un Objeto</h2>
-
+        <h2>7. Desestructuración</h2>
+        <p>La desestructuración permite extraer valores de un objeto y guardarlos en variables normales, de forma rápida y legible.</p>
+        <p>Podrias pensar que es algo asi:</p>
         <pre>
-let persona = { nombre: "Ana", edad: 25 };
+let persona = {
+  nombre: "Ana",
+  edad: 20,
+  ciudad: "Bogotá"
+};
 
-for (let clave in persona) {
-    console.log(clave, persona[clave]);
-}
+let nombre = persona.nombre;
+let edad = persona.edad;
         </pre>
+        <p>Y funciona, pero es anticuado y repetitivo, vamos a optimizarlo mas con la desestructuración:</p>
+        <pre>
+let persona = {
+  nombre: "Ana",
+  edad: 20,
+  ciudad: "Bogotá"
+};
+
+let { nombre, edad } = persona;
+
+console.log(nombre); // Ana
+console.log(edad);   // 20
+        </pre>
+        <details>
+            <summary>Cosas a tener en cuenta:</summary><br>
+            <p class="enunciado">- Puedes cambiar el nombre de la variable y asi nombrarla como quieras y tambien evitar conflictos:</p>
+            <pre>
+let { nombre: nombrePersona, edad: años } = persona;
+
+console.log("Hola soy " + nombrePersona);   // Hola soy Ana
+console.log("Tengo " + años + " años");     // Tengo 20 años
+            </pre>
+            <p class="enunciado">- Si la propiedad no existe o por alguna razon quieres declarar otra variable adicional, puedes hacerlo y asignarle el valor que tu quieras ahi mismo:</p>
+            <pre>
+let { telefono = "No registrado", nombre, edad } = persona;
+
+console.log(telefono);  // No registrado
+            </pre>
+            <p class="enunciado">- Si tienes curiosidad sobre como desestructurar un objeto con anidaciones, aqui es:</p>
+            <pre>
+let usuario = {
+  nombre: "Luis",
+  direccion: {
+    ciudad: "Medellín",
+    barrio: "Laureles"
+  }
+};
+
+let { direccion: { ciudad }} = usuario;
+
+console.log(ciudad);   // Medellín
+            </pre>
+        </details>
+        <div class="boton_tridi">
+            <button class="tridi" onclick="window.location.href='preguntas.html'">Actividad participativa</button>
+        </div>
     </div>
 
     <!-- 8 -->
     <div class="card">
-        <h2>8. Métodos útiles de Object</h2>
-
-        <pre>
-Object.keys(persona);   // ["nombre", "edad"]
-Object.values(persona); // ["Ana", 25]
-Object.entries(persona);// [["nombre","Ana"],["edad",25]]
-        </pre>
-    </div>
-
-    <!-- 9 -->
-    <div class="card">
-        <h2>9. Desestructuración</h2>
-
-        <pre>
-let producto = { nombre: "PC", precio: 500 };
-
-let { nombre, precio } = producto;
-console.log(nombre, precio);
-        </pre>
-    </div>
-
-    <!-- 10 -->
-    <div class="card">
-        <h2>10. Clases (La Forma Moderna)</h2>
+        <h2>8. Clases (La Forma Moderna)</h2>
+        <p>Una clase es una plantilla para crear objetos con propiedades y métodos.<br><br>👉 Antes creábamos objetos uno por uno.<br>👉 Ahora, Con clases podemos crear muchos objetos similares.</p>
 
         <pre>
 class Persona {
@@ -330,10 +385,76 @@ class Persona {
         console.log("Hola, soy " + this.nombre);
     }
 }
-
-let ana = new Persona("Ana", 25);
-ana.saludar();
         </pre>
+        <p>Esto solo es la clase, aun no hay ningun objeto creado, por lo tanto hay que crear la instancia de esta forma:</p>
+        <pre>
+let persona1 = new Persona("Ana", 25);
+persona1.saludar();
+        </pre>
+        <p>Ahora si, ya existe un objeto.</p>
+        <details>
+            <summary>Herencias</summary><br>
+            <p class="enunciado">Las herencias ocurren cuando una clase hereda propiedades y métodos de otra, como un padre y su hijo:</p>
+            <pre>
+class Persona {
+  saludar() {
+    console.log("Hola");
+  }
+}
+
+class Estudiante extends Persona {
+  estudiar() {
+    console.log("Estoy estudiando");
+  }
+}
+
+let joven = new Estudiante();
+joven.saludar();   // heredado
+joven.estudiar();  // propio
+            </pre>
+            <p class="importan">MUY IMPORTANTE</p>
+            <p class="enunciado">Cuando el padre tiene constructor, el hijo debe llamar a super().</p>
+            <pre>
+class Persona {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+}
+
+class Estudiante extends Persona {
+  constructor(nombre, carrera) {
+    super(nombre); // obligatorio
+    this.carrera = carrera;
+  }
+}
+            </pre>
+            <p class="enunciado">Sin la palabra reservada super() daria error, esto es una regla del lenguaje.</p>
+        </details>
+        <details class="importante">
+            <summary>Dato importante</summary><br>
+            <p class="enunciado">No siempre es obligatorio que una clase lleve un constructor, no es lo mas optimo hacer una clase sin constructor pero se puede:</p>
+            <pre>
+class Saludo {
+  decirHola() {
+    console.log("Hola");
+  }
+}
+
+let s = new Saludo();
+s.decirHola();  // Hola
+            </pre>
+            <p class="enunciado">Funciona perfecto, pero JS al ver que no has puesto un constructor, lo creara automaticamente vacio.</p>
+            <p class="importan">PERO OJO</p>
+            <p class="enunciado">Cuando quieres inicializar propiedades y recibir parametros, si es obligatorio poner un constructor.</p>
+            <pre>
+class Persona {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+}
+            </pre>
+            <p>CONCLUSION: El constructor no es obligatorio, pero es necesario cuando el objeto necesita datos iniciales.</p>
+          </details>
     </div>
 
 </div>

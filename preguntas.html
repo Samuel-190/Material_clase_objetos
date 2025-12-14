@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba Objetos en JavaScript</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #2196F3, #21CBF3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .contenedor {
+      background: white;
+      padding: 30px;
+      width: 420px;
+      border-radius: 15px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    p {
+      color: #555;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background-color: #d0d0d0;
+    }
+
+    .correcto {
+      background-color: #4CAF50 !important;
+      color: white;
+    }
+
+    .incorrecto {
+      background-color: #f44336 !important;
+      color: white;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    #resultado {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #siguiente {
+      background-color: #2196F3;
+      color: white;
+      font-weight: bold;
+    }
+
+    #siguiente:hover {
+      background-color: #1976D2;
+    }
+
+    .temas {
+      text-align: left;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PORTADA -->
+  <div class="contenedor" id="portada">
+    <h1>Prueba Interactiva</h1>
+    <h3>Objetos en JavaScript</h3>
+
+    <div class="temas">
+      <p>📌 Temas evaluados:</p>
+      <p>• Creación de objetos</p>
+      <p>• Modificación de propiedades</p>
+      <p>• Métodos y <code>this</code></p>
+      <p>• Desestructuración</p>
+    </div>
+
+    <button onclick="iniciar()">Iniciar prueba</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="contenedor oculto" id="quiz">
+    <h3 id="pregunta"></h3>
+
+    <button class="opcion" onclick="responder(0)" id="op0"></button>
+    <button class="opcion" onclick="responder(1)" id="op1"></button>
+    <button class="opcion" onclick="responder(2)" id="op2"></button>
+    <button class="opcion" onclick="responder(3)" id="op3"></button>
+
+    <p id="resultado"></p>
+
+    <button id="siguiente" class="oculto" onclick="siguientePregunta()">
+      Siguiente pregunta
+    </button>
+  </div>
+
+  <script>
+    const preguntas = [
+    {
+        texto: "¿Cuál es la forma correcta de crear un objeto literal?",
+        opciones: [
+        "A) let obj = []",
+        "B) let obj = {}",
+        "C) let obj = ()",
+        "D) let obj = new Array()"
+        ],
+        correcta: 1
+    },
+    {
+        texto: "¿Cómo se agrega una nueva propiedad a un objeto?",
+        opciones: [
+        "A) obj->prop = valor",
+        "B) obj[prop] == valor",
+        "C) obj.prop = valor",
+        "D) add obj.prop"
+        ],
+        correcta: 2
+    },
+    {
+        texto: "¿Qué es un método en JavaScript?",
+        opciones: [
+        "A) Una variable",
+        "B) Un objeto",
+        "C) Una función dentro de un objeto",
+        "D) Un array"
+        ],
+        correcta: 2
+    },
+    {
+        texto: "¿Cuál es la forma correcta de llamar a un método?",
+        opciones: [
+        "A) obj.metodo",
+        "B) metodo()",
+        "C) obj.metodo()",
+        "D) call obj.metodo"
+        ],
+        correcta: 2
+    },
+    {
+        texto: "¿Qué hacen Object.keys(obj) y Object.values(obj)?",
+        opciones: [
+            "A) Crean un nuevo objeto",
+            "B) Devuelven arrays con las claves y los valores del objeto",
+            "C) Eliminan propiedades del objeto",
+            "D) Devuelven metodos con las claves y los valores del objeto"
+        ],
+        correcta: 1
+    },
+    {
+        texto: "¿Qué ocurre si accedes a una propiedad que no existe?",
+        opciones: [
+        "A) Da error",
+        "B) El programa se detiene",
+        "C) Devuelve null",
+        "D) Devuelve undefined"
+        ],
+        correcta: 3
+    },
+    {
+        texto: "¿Qué hace el siguiente código?\nlet { nombre } = persona;",
+        opciones: [
+        "A) Crea un objeto",
+        "B) Elimina una propiedad",
+        "C) Extrae una propiedad en una variable",
+        "D) Modifica el objeto"
+        ],
+        correcta: 2
+    },
+    {
+        texto: "¿Cuál es el error en este método?\nconsole.log(nombre);",
+        opciones: [
+        "A) Falta return",
+        "B) Falta this.nombre",
+        "C) Falta console",
+        "D) No hay error"
+        ],
+        correcta: 1
+    },
+    {
+        texto: "¿Qué hace  delete obj.prop?",
+        opciones: [
+        "A) Vacía el objeto",
+        "B) Borra todo el objeto",
+        "C) Elimina una propiedad",
+        "D) Cambia el valor a null"
+        ],
+        correcta: 2
+    },
+    {
+        texto: "¿Cuál afirmación es correcta sobre la desestructuración?",
+        opciones: [
+        "A) Modifica el objeto original",
+        "B) Elimina propiedades",
+        "C) Solo extrae valores",
+        "D) Crea métodos"
+        ],
+        correcta: 2
+    }
+    ];
+
+
+    let indice = 0;
+    let puntaje = 0;
+
+    function iniciar() {
+      document.getElementById("portada").classList.add("oculto");
+      document.getElementById("quiz").classList.remove("oculto");
+      cargarPregunta();
+    }
+
+    function cargarPregunta() {
+      document.getElementById("resultado").textContent = "";
+      document.getElementById("siguiente").classList.add("oculto");
+
+      const p = preguntas[indice];
+      document.getElementById("pregunta").textContent = p.texto;
+
+      p.opciones.forEach((op, i) => {
+        const btn = document.getElementById("op" + i);
+        btn.textContent = op;
+        btn.className = "opcion";
+        btn.disabled = false;
+      });
+    }
+
+    function responder(opcion) {
+      const correcta = preguntas[indice].correcta;
+
+      if (opcion === correcta) {
+        document.getElementById("op" + opcion).classList.add("correcto");
+        document.getElementById("resultado").textContent = "✅ Correcto";
+        puntaje++;
+      } else {
+        document.getElementById("op" + opcion).classList.add("incorrecto");
+        document.getElementById("resultado").textContent = "❌ Incorrecto";
+      }
+
+      // Solo se deshabilitan las opciones
+      document.querySelectorAll(".opcion").forEach(b => b.disabled = true);
+
+      document.getElementById("siguiente").classList.remove("oculto");
+    }
+
+    function siguientePregunta() {
+      indice++;
+      if (indice < preguntas.length) {
+        cargarPregunta();
+      } else {
+        document.getElementById("quiz").innerHTML = `
+          <h2>Prueba finalizada</h2>
+          <p>Puntaje obtenido:</p>
+          <h1>${puntaje} / ${preguntas.length}</h1>
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>
